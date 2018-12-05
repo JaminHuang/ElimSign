@@ -1,0 +1,4 @@
+{
+  "presets":["react","latest"],
+  "plugins": [["import", { "libraryName": "antd-mobile" }, "react-hot-loader/babel"]]
+}

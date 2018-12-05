@@ -1,0 +1,13 @@
+html,body { overflow-y: auto; }
+h3{ font-size: 4vw; line-height:4vw; text-align: center; margin:3vh; }
+h3 span{ font-size: 5vw; color: #ff0000; }
+
+#container { width: 100%; overflow: hidden; }
+.am-button { border: 0; color: #108ee9; margin-right: -8px; }
+.tab-pane { display: flex; align-items: center; justify-content: center; height: 5rem; background-color: #ffffff; }
+.am-grid .am-flexbox .am-flexbox-item .am-grid-item-content .am-grid-item-inner-content .am-grid-icon { width: 40%; height: 40%; }
+.callName { display: flex; align-items: center; justify-content: center; height: 1rem; background-color: #ffffff; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; }
+.am-list-body { height: 4.5rem; overflow: auto; }
+.logo{ text-align: center; margin-top: 16px; }
+.logo img{ width: 10%; height: 20%; }
+.foot{ margin-top: 16px; font-size: 3vw; text-align: center; }
