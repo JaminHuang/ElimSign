@@ -1,19 +1,19 @@
 'use strict';
 import Index from './';
-import { GatherCall, Gather } from './mobile';
+import { ElimGatherCall, ElimGather } from './mobile';
 
 export default {
     component: Index,
     path: '/',
     childRoutes: [
         {
-            component: GatherCall,
-            path: 'elim',
+            component: ElimGatherCall,
+            path: 'elim-call',
             title: '聚会点名'
         },
         {
-            component: Gather,
-            path: 'gather',
+            component: ElimGather,
+            path: 'elim-gather',
             title: '聚会签到'
         }
     ]

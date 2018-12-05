@@ -10,7 +10,10 @@ import _ from 'lodash';
 const TabPane = Tabs.TabPane;
 const Prompt = Modal.prompt;
 
-class Gather extends Component {
+let churchId = '4455ba6a12f26e08';//以琳标识
+let logo = 'http://elim.jaminhuang.com/sign/logo/elim.png';//以琳logo地址
+
+class ElimGather extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -34,15 +37,15 @@ class Gather extends Component {
         if(userName === ""){
             userName = document.getElementById('txtUserName').value;
         }
-        let data = { body : Encrypt({userName: userName, gender: gender, groupName: groupName, gatherType: "0"})};
-        Request.FetchPost("api/Gather/Sign", data).then(json=>{
+        let data = { body : Encrypt({churchId: churchId, userName: userName, gender: gender, groupName: groupName, gatherType: "0"})};
+        Request.FetchPost("www/gather/sign", data).then(json=>{
             if (json.Code === ResponseCode.Success ) {
                 Toast.show('签到成功', 1);
                 this.getSignCount("0");
                 this.delUser(userName);
             }
             else {
-                Toast.show(json.ErrorMsg, 1);
+                Toast.show(json.Msg, 1);
             }
         })
     }
@@ -81,20 +84,19 @@ class Gather extends Component {
         this.setState({users: users});
     }
 
-
     /*获取未签到用户*/
     getList() {
         let nowDate = moment().locale('en').utcOffset(0);
-        let data = {body : Encrypt({gatherType: "0", date: nowDate})};
+        let data = {body : Encrypt({churchId:churchId, gatherType: "0", date: nowDate})};
         let that = this;
-        Request.FetchPost("api/Gather/GetSignNameList", data).then(json=>{
+        Request.FetchPost("www/gather/name/list", data).then(json=>{
             if (json.Code === ResponseCode.Success ) {
-                _.forEach(json.Content, function (n) {
+                _.forEach(json.Data, function (n) {
                     that.delUser(n.UserName);
                 });
             }
             else {
-                Toast.show(json.ErrorMsg, 1);
+                Toast.show(json.Msg, 1);
             }
         })
     }
@@ -102,13 +104,13 @@ class Gather extends Component {
     /*获取签到人数*/
     getSignCount(gatherType) {
         let that = this;
-        let data = { body : Encrypt({gatherType: gatherType})};
-        Request.FetchPost("api/Gather/GetSignCount", data).then(json=>{
+        let data = { body : Encrypt({churchId:churchId, gatherType: gatherType})};
+        Request.FetchPost("www/gather/count", data).then(json=>{
             if (json.Code === ResponseCode.Success) {
-                that.setState({preCount:that.state.count===null?0:that.state.count, count:json.Content});
+                that.setState({preCount:that.state.count===null?0:that.state.count, count:json.Data});
             }
             else {
-                Toast.show(json.ErrorMsg, 1);
+                Toast.show(json.Msg, 1);
             }
         });
     }
@@ -116,20 +118,20 @@ class Gather extends Component {
     /*获取当前签到列表*/
     getSignList() {
         let nowDate = moment().locale('en').utcOffset(0);
-        let data = {body : Encrypt({gatherType: "0", date: nowDate})};
-        Request.FetchPost("api/Gather/GetSignNameList", data).then(json=>{
+        let data = {body : Encrypt({churchId:churchId, gatherType: "0", date: nowDate})};
+        Request.FetchPost("www/gather/name/list", data).then(json=>{
             if (json.Code === ResponseCode.Success ) {
-                Popup.show(<SianNameList list={json.Content} />);
+                Popup.show(<SianNameList list={json.Data} />);
             }
             else {
-                Toast.show(json.ErrorMsg, 1);
+                Toast.show(json.Msg, 1);
             }
         })
     }
 
     /*跳转到点名页面*/
     gotoCall() {
-        window.location.href = "/elim";
+        window.location.href = "/elim-call";
     }
 
     render() {
@@ -168,11 +170,11 @@ class Gather extends Component {
                 </TabPane>
             </Tabs>
             <div className="logo">
-                <img src={require("../../../static/images/Logo.png")} />
+                <img src={logo} />
             </div>
-            <p className="foot">©版权所有  Grace & Elim 2016 | 以琳 • 网络事工组</p>
+            <p className="foot">©版权所有  Grace & Elim 2016-2018 | 以琳 • 网络事工组</p>
         </div>
     }
 }
 
-export default Gather;
+export default ElimGather;

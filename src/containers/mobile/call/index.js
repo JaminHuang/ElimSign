@@ -1,7 +1,7 @@
 'use strict';
 
-import GatherCall from './gather';
+import ElimGatherCall from './elim';
 
 export {
-    GatherCall
+    ElimGatherCall
 }

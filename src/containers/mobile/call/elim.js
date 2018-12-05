@@ -10,7 +10,9 @@ let nList;
 
 let bs = true;
 
-class GatherCall extends Component {
+let logo = 'http://elim.jaminhuang.com/sign/logo/elim.png';//以琳logo地址
+
+class ElimGatherCall extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -51,7 +53,7 @@ class GatherCall extends Component {
         console.log(nowDate);
         nList = document.getElementsByClassName("am-grid-item-content");
         let data = {body : Encrypt({gatherType: "0", date: nowDate})};
-        Request.FetchPost("api/Gather/GetSignNameList", data).then(json=>{
+        Request.FetchPost("api/Elim/GetSignNameList", data).then(json=>{
             if (json.Code == ResponseCode.Success ) {
                 let sList = [];
                 json.Content.map(n=> {
@@ -104,11 +106,11 @@ class GatherCall extends Component {
             <div className="callName" id="chooseName">{count > 0 ? "点击 √ 开始，点击 × 停止" : "暂时无人签到"}</div>
             <Grid data={nameList} columnNum={5} />
             <div className="logo">
-                <img src={require("../../../static/images/Logo.png")} />
+                <img src={logo} />
             </div>
-            <p className="foot">©版权所有  Grace & Elim 2016 | 以琳 • 网络事工组</p>
+            <p className="foot">©版权所有  Grace & Elim 2016-2018 | 以琳 • 网络事工组</p>
         </div>
     }
 }
 
-export default GatherCall;
+export default ElimGatherCall;

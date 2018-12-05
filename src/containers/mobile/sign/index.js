@@ -1,6 +1,6 @@
 'use strict';
-import Gather from './gather';
+import ElimGather from './elim';
 
 export {
-    Gather
+    ElimGather
 }
