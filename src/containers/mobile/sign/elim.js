@@ -3,15 +3,12 @@ import React, { Component } from 'react';
 import { NoticeBar, Tabs, Grid, Toast, Button, Modal, NavBar, Popup } from 'antd-mobile';
 import { SianNameList } from '../../../components/mobile/index';
 import CountUp from 'react-countup';
-import { Request, ResponseCode, Encrypt } from '../../../server/index';
+import { Request, ResponseCode, Encrypt, Global } from '../../../server/index';
 import moment from 'moment-timezone/moment-timezone';
 import _ from 'lodash';
 
 const TabPane = Tabs.TabPane;
 const Prompt = Modal.prompt;
-
-let churchId = '4455ba6a12f26e08';//以琳标识
-let logo = 'http://elim.jaminhuang.com/sign/logo/elim.png';//以琳logo地址
 
 class ElimGather extends Component {
     constructor(props) {
@@ -37,7 +34,7 @@ class ElimGather extends Component {
         if(userName === ""){
             userName = document.getElementById('txtUserName').value;
         }
-        let data = { body : Encrypt({churchId: churchId, userName: userName, gender: gender, groupName: groupName, gatherType: "0"})};
+        let data = { body : Encrypt({churchId: Global.ElimChurchId, userName: userName, gender: gender, groupName: groupName, gatherType: "0"})};
         Request.FetchPost("www/gather/sign", data).then(json=>{
             if (json.Code === ResponseCode.Success ) {
                 Toast.show('签到成功', 1);
@@ -87,7 +84,7 @@ class ElimGather extends Component {
     /*获取未签到用户*/
     getList() {
         let nowDate = moment().locale('en').utcOffset(0);
-        let data = {body : Encrypt({churchId:churchId, gatherType: "0", date: nowDate})};
+        let data = {body : Encrypt({churchId:Global.ElimChurchId, gatherType: "0", date: nowDate})};
         let that = this;
         Request.FetchPost("www/gather/name/list", data).then(json=>{
             if (json.Code === ResponseCode.Success ) {
@@ -104,7 +101,7 @@ class ElimGather extends Component {
     /*获取签到人数*/
     getSignCount(gatherType) {
         let that = this;
-        let data = { body : Encrypt({churchId:churchId, gatherType: gatherType})};
+        let data = { body : Encrypt({churchId:Global.ElimChurchId, gatherType: gatherType})};
         Request.FetchPost("www/gather/count", data).then(json=>{
             if (json.Code === ResponseCode.Success) {
                 that.setState({preCount:that.state.count===null?0:that.state.count, count:json.Data});
@@ -118,10 +115,10 @@ class ElimGather extends Component {
     /*获取当前签到列表*/
     getSignList() {
         let nowDate = moment().locale('en').utcOffset(0);
-        let data = {body : Encrypt({churchId:churchId, gatherType: "0", date: nowDate})};
+        let data = {body : Encrypt({churchId:Global.ElimChurchId, gatherType: "0", date: nowDate})};
         Request.FetchPost("www/gather/name/list", data).then(json=>{
             if (json.Code === ResponseCode.Success ) {
-                Popup.show(<SianNameList list={json.Data} />);
+                Popup.show(<SianNameList list={json.Data} delItem={(gatherId)=>this.delItem(gatherId)}  />);
             }
             else {
                 Toast.show(json.Msg, 1);
@@ -170,7 +167,7 @@ class ElimGather extends Component {
                 </TabPane>
             </Tabs>
             <div className="logo">
-                <img src={logo} />
+                <img src={Global.ElimLogo} />
             </div>
             <p className="foot">©版权所有  Grace & Elim 2016-2018 | 以琳 • 网络事工组</p>
         </div>

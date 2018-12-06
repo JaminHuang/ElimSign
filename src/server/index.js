@@ -1,8 +1,8 @@
 'use strict';
 import * as Request from './request';
 import { Encrypt, Decrypt } from './aes';
-import { ResponseCode } from './common';
+import { ResponseCode, Global } from './common';
 
 export {
-    Request, Encrypt, Decrypt, ResponseCode
+    Request, Encrypt, Decrypt, ResponseCode, Global
 }

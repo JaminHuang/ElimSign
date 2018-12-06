@@ -1,16 +1,14 @@
 'use strict';
 import React, { Component } from 'react';
-import { NoticeBar, Grid, NavBar, Button } from 'antd-mobile';
+import { NoticeBar, Grid, NavBar, Button, Toast } from 'antd-mobile';
 import moment from 'moment-timezone/moment-timezone';
-import { Request, ResponseCode, Encrypt } from '../../../server/index';
+import { Request, ResponseCode, Encrypt, Global } from '../../../server/index';
 
 let t;
 let i;
 let nList;
 
 let bs = true;
-
-let logo = 'http://elim.jaminhuang.com/sign/logo/elim.png';//以琳logo地址
 
 class ElimGatherCall extends Component {
     constructor(props) {
@@ -50,13 +48,12 @@ class ElimGatherCall extends Component {
 
     componentDidMount() {
         let nowDate = moment().locale('en').utcOffset(0);//获取当前时间
-        console.log(nowDate);
         nList = document.getElementsByClassName("am-grid-item-content");
-        let data = {body : Encrypt({gatherType: "0", date: nowDate})};
-        Request.FetchPost("api/Elim/GetSignNameList", data).then(json=>{
-            if (json.Code == ResponseCode.Success ) {
+        let data = {body : Encrypt({churchId:Global.ElimChurchId, gatherType: "0", date: nowDate})};
+        Request.FetchPost("www/gather/name/list", data).then(json=>{
+            if (json.Code === ResponseCode.Success ) {
                 let sList = [];
-                json.Content.map(n=> {
+                json.Data.map(n=> {
                     switch (n.Gender) {
                         case 0:
                             sList.push({
@@ -81,17 +78,17 @@ class ElimGatherCall extends Component {
                             break;
                     }
                 });
-                this.setState({nameList:sList, count: json.Content.length});
+                this.setState({nameList:sList, count: json.Data.length});
             }
             else {
-                alert(json.ErrorMsg);
+                Toast.show(json.Msg, 1);
             }
         })
     }
 
     /*跳转至签到页面*/
     gotoSign() {
-        window.location.href = "/gather";
+        window.location.href = "/elim-gather";
     }
 
     render() {
@@ -106,7 +103,7 @@ class ElimGatherCall extends Component {
             <div className="callName" id="chooseName">{count > 0 ? "点击 √ 开始，点击 × 停止" : "暂时无人签到"}</div>
             <Grid data={nameList} columnNum={5} />
             <div className="logo">
-                <img src={logo} />
+                <img src={Global.ElimLogo} />
             </div>
             <p className="foot">©版权所有  Grace & Elim 2016-2018 | 以琳 • 网络事工组</p>
         </div>
