@@ -21,11 +21,11 @@ class ElimGather extends Component {
     }
 
     componentWillMount() {
-        this.getList();
+        this.getSignCount("0");
     }
 
     componentDidMount() {
-        this.getSignCount("0");
+
     }
 
     /*签到*/
@@ -105,6 +105,7 @@ class ElimGather extends Component {
         Request.FetchPost("www/gather/count", data).then(json=>{
             if (json.Code === ResponseCode.Success) {
                 that.setState({preCount:that.state.count===null?0:that.state.count, count:json.Data});
+                that.getList();
             }
             else {
                 Toast.show(json.Msg, 1);
@@ -118,7 +119,7 @@ class ElimGather extends Component {
         let data = {body : Encrypt({churchId:Global.ElimChurchId, gatherType: "0", date: nowDate})};
         Request.FetchPost("www/gather/name/list", data).then(json=>{
             if (json.Code === ResponseCode.Success ) {
-                Popup.show(<SianNameList list={json.Data} delItem={(gatherId)=>this.delItem(gatherId)}  />);
+                Popup.show(<SianNameList list={json.Data} pop={Popup} />);
             }
             else {
                 Toast.show(json.Msg, 1);
