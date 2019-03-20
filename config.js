@@ -60,3 +60,23 @@ let userList = {
 
     ]
 };
+
+let uList = {
+    'kks': [
+        { 'name': '叶淑强', 'group': '棵棵树', 'gender':1, 'key':'ysq', 'img':'/public/ysq.png' },
+        { 'name': '黄佳佳', 'group': '棵棵树', 'gender':0, 'key':'hjj', 'img':'/public/hjj.png' },
+        { 'name': '董约翰', 'group': '棵棵树', 'gender':1, 'key':'dyh', 'img':'/public/dyh.png' },
+        { 'name': '诸葛衍昆', 'group': '棵棵树', 'gender':1, 'key':'zgyk', 'img':'/public/zgyk.png' },
+        { 'name': '黄鸯鸯', 'group': '棵棵树', 'gender':0, 'key':'hyy', 'img':'/public/hyy.png' },
+        { 'name': '张恺特', 'group': '棵棵树', 'gender':1, 'key':'zkt', 'img':'/public/zkt.png' },
+        { 'name': '余雪纯', 'group': '棵棵树', 'gender':0, 'key':'yxc', 'img':'/public/yxc.png' },
+        { 'name': '杨胜钰', 'group': '棵棵树', 'gender':0, 'key':'ysy', 'img':'/public/ysy.png' },
+        { 'name': '徐晶晶', 'group': '棵棵树', 'gender':0, 'key':'xjj', 'img':'/public/xjj.png' },
+        { 'name': '黄章明', 'group': '棵棵树', 'gender':1, 'key':'hzm', 'img':'/public/hzm.png' },
+        { 'name': '黄益朗', 'group': '棵棵树', 'gender':1, 'key':'hyl', 'img':'/public/hyl.png' },
+        { 'name': '秦佳佳', 'group': '棵棵树', 'gender':0, 'key':'qjj', 'img':'/public/qjj.png' },
+        { 'name': '林璐瑶', 'group': '棵棵树', 'gender':0, 'key':'lly', 'img':'/public/lly.png' },
+        { 'name': '黄益人', 'group': '棵棵树', 'gender':1, 'key':'hyr', 'img':'/public/hyr.png' },
+        { 'name': '许文凯', 'group': '棵棵树', 'gender':1, 'key':'xwk', 'img':'/public/xwk.png' }
+    ]
+};

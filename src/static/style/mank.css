@@ -1,0 +1,61 @@
+body {
+    background: #E7244B;
+}
+
+.top {
+    width: 100%;
+}
+
+.m-div {
+    width: 100%;
+    height: 10vw;
+    line-height: 6vw;
+    text-align: center;
+}
+
+.m-div span {
+    color: #ffffff;
+    font-size: 4vw;
+}
+
+.weui-grid {
+    padding: 0;
+}
+
+.weui-grid:before {
+    border: 0;
+}
+
+.weui-grid:after {
+    border: 0;
+}
+
+.weui-grids:before {
+    border: 0;
+}
+
+a {
+    text-align: center;
+}
+
+.img {
+    width: 90%;
+    margin-top: 1vw;
+    height: 33.9vw;
+}
+
+.info {
+    display: none;
+    width: 0;
+    margin-top: 1vw;
+    height: 33.9vw;
+}
+
+.shelter {
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+
+.bottom {
+    width: 100%;
+}
