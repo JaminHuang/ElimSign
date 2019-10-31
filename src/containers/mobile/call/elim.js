@@ -50,35 +50,35 @@ class ElimGatherCall extends Component {
         let nowDate = moment().locale('en').utcOffset(0);//获取当前时间
         nList = document.getElementsByClassName("am-grid-item-content");
         let data = {body : Encrypt({churchId:Global.ElimChurchId, gatherType: "0", date: nowDate})};
-        Request.FetchPost("www/gather/name/list", data).then(json=>{
-            if (json.Code === ResponseCode.Success ) {
+        Request.FetchPost("gather/name/list", data).then(json=>{
+            if (json.code === ResponseCode.Success ) {
                 let sList = [];
-                json.Data.map(n=> {
-                    switch (n.Gender) {
+                json.data.list.map(n=> {
+                    switch (n.gender) {
                         case 0:
                             sList.push({
                                 icon: require("../../../static/images/sister.png"),
-                                gender: n.Gender,
-                                text: n.UserName
+                                gender: n.gender,
+                                text: n.userName
                             });
                             break;
                         case 1:
                             sList.push({
                                 icon: require("../../../static/images/brother.png"),
-                                gender: n.Gender,
-                                text: n.UserName
+                                gender: n.gender,
+                                text: n.userName
                             });
                             break;
                         case 2:
                             sList.push({
                                 icon: "https://os.alipayobjects.com/rmsportal/IptWdCkrtkAUfjE.png",
-                                gender: n.Gender,
-                                text: n.UserName
+                                gender: n.gender,
+                                text: n.userName
                             });
                             break;
                     }
                 });
-                this.setState({nameList:sList, count: json.Data.length});
+                this.setState({nameList:sList, count: json.data.list.length});
             }
             else {
                 Toast.show(json.Msg, 1);

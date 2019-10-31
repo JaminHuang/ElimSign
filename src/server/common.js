@@ -10,6 +10,7 @@ export const Global = {
 
 /*API接口错误代码*/
 export const ResponseCode = {
+    SigntureFail : 8100,
     Success : 8200,
     Fail : 8300,
     IpAddressError : 8400,

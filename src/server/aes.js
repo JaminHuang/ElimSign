@@ -1,7 +1,7 @@
 import * as CryptoJS from 'crypto-js';
 
-let AuthTokenKey = "elimusic--client"; //AES密钥
-let AuthTokenIv = '8174635321487652'; //AES向量
+let AuthTokenKey = "elim-sign-client"; //AES密钥
+let AuthTokenIv = '5e8y6w4y6u8w9j8e'; //AES向量
 
 /*AES加密*/
 export function Encrypt(data) {

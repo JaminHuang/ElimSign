@@ -35,14 +35,14 @@ class ElimGather extends Component {
             userName = document.getElementById('txtUserName').value;
         }
         let data = { body : Encrypt({churchId: Global.ElimChurchId, userName: userName, gender: gender, groupName: groupName, gatherType: "0"})};
-        Request.FetchPost("www/gather/sign", data).then(json=>{
-            if (json.Code === ResponseCode.Success ) {
+        Request.FetchPost("gather/sign", data).then(json=>{
+            if (json.code === ResponseCode.Success ) {
                 Toast.show('签到成功', 1);
                 this.getSignCount("0");
                 this.delUser(userName);
             }
             else {
-                Toast.show(json.Msg, 1);
+                Toast.show(json.msg, 1);
             }
         })
     }
@@ -86,14 +86,14 @@ class ElimGather extends Component {
         let nowDate = moment().locale('en').utcOffset(0);
         let data = {body : Encrypt({churchId:Global.ElimChurchId, gatherType: "0", date: nowDate})};
         let that = this;
-        Request.FetchPost("www/gather/name/list", data).then(json=>{
-            if (json.Code === ResponseCode.Success ) {
-                _.forEach(json.Data, function (n) {
+        Request.FetchPost("gather/name/list", data).then(json=>{
+            if (json.code === ResponseCode.Success ) {
+                _.forEach(json.data.list, function (n) {
                     that.delUser(n.UserName);
                 });
             }
             else {
-                Toast.show(json.Msg, 1);
+                Toast.show(json.msg, 1);
             }
         })
     }
@@ -102,13 +102,13 @@ class ElimGather extends Component {
     getSignCount(gatherType) {
         let that = this;
         let data = { body : Encrypt({churchId:Global.ElimChurchId, gatherType: gatherType})};
-        Request.FetchPost("www/gather/count", data).then(json=>{
-            if (json.Code === ResponseCode.Success) {
-                that.setState({preCount:that.state.count===null?0:that.state.count, count:json.Data});
+        Request.FetchPost("gather/count", data).then(json=>{
+            if (json.code === ResponseCode.Success) {
+                that.setState({preCount:that.state.count===null?0:that.state.count, count:json.data.count});
                 that.getList();
             }
             else {
-                Toast.show(json.Msg, 1);
+                Toast.show(json.msg, 1);
             }
         });
     }
@@ -117,12 +117,12 @@ class ElimGather extends Component {
     getSignList() {
         let nowDate = moment().locale('en').utcOffset(0);
         let data = {body : Encrypt({churchId:Global.ElimChurchId, gatherType: "0", date: nowDate})};
-        Request.FetchPost("www/gather/name/list", data).then(json=>{
-            if (json.Code === ResponseCode.Success ) {
-                Popup.show(<SianNameList list={json.Data} pop={Popup} />);
+        Request.FetchPost("gather/name/list", data).then(json=>{
+            if (json.code === ResponseCode.Success ) {
+                Popup.show(<SianNameList list={json.data.list} pop={Popup} />);
             }
             else {
-                Toast.show(json.Msg, 1);
+                Toast.show(json.msg, 1);
             }
         })
     }
