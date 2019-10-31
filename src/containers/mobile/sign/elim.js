@@ -89,7 +89,7 @@ class ElimGather extends Component {
         Request.FetchPost("gather/name/list", data).then(json=>{
             if (json.code === ResponseCode.Success ) {
                 _.forEach(json.data.list, function (n) {
-                    that.delUser(n.UserName);
+                    that.delUser(n.userName);
                 });
             }
             else {
